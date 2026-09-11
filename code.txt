@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-uont8_t value;
+uint8_t value;
 
 void setup() {
   DDRD &= 0X0F; // Configure PD7-PD4 as inputs (0X0F)
@@ -26,5 +26,4 @@ void loop() {
   Serial.println(value);
 
   delay(1000);
-
 }
