@@ -1,0 +1,30 @@
+#include <Arduino.h>
+
+uont8_t value;
+
+void setup() {
+  DDRD &= 0X0F; // Configure PD7-PD4 as inputs (0X0F)
+  PORTD |= 0XF0; // Enable input pullup (0XF0)
+  DDRB &= 0X0F; // Configure PB3-PB0 (0X0F)
+
+   Serial.begin(9600);
+
+}
+
+
+void loop() {
+  value = PIND; // Read switches from PD7-PD4
+  value &= 0XF0; // Mask the values (0XF0)
+  value = value >> 4; // Shift right value >> 4
+  value = ~value; // Invert the value
+  value &= 0X0F; // Mask the value (0X0F)
+  PORTB = value; // Display on LEDs on PB3-PB0
+
+  Serial.print("Binary :");
+  Serial.println(value, BIN);
+  Serial.print("Decimal :");
+  Serial.println(value);
+
+  delay(1000);
+
+}
